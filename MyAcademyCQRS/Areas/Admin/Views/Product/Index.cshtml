@@ -1,0 +1,37 @@
+﻿@model List<GetProductsQueryResult>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ürünler</h1>
+
+<table class="table table-bordered">
+    @{
+        int count = 0;
+    }
+    <tr>
+        <th>#</th>
+        <th>Ürün Adı</th>
+        <th>Fiyat</th>
+        <th>Kategori</th>
+        <th>İşlemler</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td>@item.Name</td>
+            <td>@item.Price ₺</td>
+            <td>@item.Category.Name</td>
+            <td>
+                <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.Id" class="btn btn-danger">Sil</a>
+                <a asp-controller="Product" asp-action="UpdateProduct" asp-route-id="@item.Id" class="btn btn-info">Güncelle</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a asp-controller="Product" asp-action="CreateProduct" class="btn btn-primary">Yeni Ürün Ekle</a>
+
